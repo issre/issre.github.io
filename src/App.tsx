@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Trophy,
-  History,
+  Home,
   Users,
   ExternalLink,
   Award as AwardIcon,
@@ -148,7 +148,7 @@ export default function App() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-2">
-            <NavItem id="home" label="Home" icon={History} />
+            <NavItem id="home" label="Home" icon={Home} />
             <NavItem id="editions" label="Editions" icon={Calendar} />
             <NavItem id="awards" label="Awards" icon={Trophy} />
             <NavItem id="committees" label="Committees" icon={Users} />
@@ -168,7 +168,7 @@ export default function App() {
           className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden"
         >
           <div className="flex flex-col gap-4">
-            <NavItem id="home" label="Home" icon={History} />
+            <NavItem id="home" label="Home" icon={Home} />
             <NavItem id="editions" label="Editions" icon={Calendar} />
             <NavItem id="awards" label="Awards" icon={Trophy} />
             <NavItem id="committees" label="Committees" icon={Users} />
