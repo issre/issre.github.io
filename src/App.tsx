@@ -528,9 +528,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                 <div>
                   <div className="flex justify-between items-center mb-4">
                     <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${item.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                        item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                          item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                            'bg-blue-100 text-blue-800'
+                      item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                        item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                          'bg-blue-100 text-blue-800'
                       }`}>
                       {item.category}
                     </span>
@@ -630,9 +630,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
 
             <div className="flex items-center gap-2.5 mb-4">
               <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${selectedNews.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                  selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                    selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                      'bg-blue-100 text-blue-800'
+                selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                  selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                    'bg-blue-100 text-blue-800'
                 }`}>
                 {selectedNews.category}
               </span>
