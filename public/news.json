@@ -1,5 +1,15 @@
 [
   {
+    "id": "sc-news-2026-04",
+    "date": "2026-05-31",
+    "title": "ISSRE 2026 Keynotes Announced",
+    "category": "Announcement",
+    "summary": "We are proud to announce the distinguished Keynote Speakers for ISSRE 2026 in Cyprus: Prof. Don Syme (GitHub Next), Prof. Paolo Tonella (USI), and Prof. Laurie Williams (NCSU).",
+    "content": "We are excited to share the distinguished Keynote Speakers for the upcoming IEEE International Symposium on Software Reliability Engineering (ISSRE 2026) in Paphos, Cyprus:\n\nProf. Don Syme (GitHub Next & King's College London)\n  • Title: The Agentic Repository Automation Revolution\n  • Overview: Exploring Continuous AI (CAI) in repository automation, AI-assisted code improvement, performance engineering, and automated formal verification.\n\nProf. Paolo Tonella (Università della Svizzera italiana - USI)\n  • Title: AI Testing: What have we learned? Where are we heading?\n  • Overview: Analyzing the exponential growth of deep learning model testing, test adequacy assessment, model-level vs. system-level failures, and quality evaluation of LLM-generated code.\n\nProf. Laurie Williams (North Carolina State University - NCSU)\n  • Title: Dependable Software, Untrusted Parts: Security Research for the Software Supply Chain\n  • Overview: Examining software supply chain security, lessons from the NSF S3C2 center, software provenance, vulnerability intelligence, developer environment security, and trustworthy software production systems in the era of AI-assisted development.\n\nJoin us in Cyprus this October to attend these keynotes and meet the speakers!",
+    "linkLabel": "Visit ISSRE 2026",
+    "link": "https://cyprusconferences.org/issre2026/keynote-speakers/"
+  },
+  {
     "id": "sc-news-2026-01",
     "date": "2026-06-05",
     "title": "Hosting Proposals for ISSRE 2029 Now Open",
@@ -7,16 +17,6 @@
     "summary": "The ISSRE Steering Committee invites proposals from academic institutions or organizations to host the 40th edition of the symposium in 2029.",
     "content": "The IEEE International Symposium on Software Reliability Engineering (ISSRE) Steering Committee is officially inviting proposals to host the 40th edition of the symposium in the fall of 2029. Hosting ISSRE is a unique opportunity to bring together leading global researchers and industry experts in software quality and dependability to your local region.\n\nInterested organizers are encouraged to review the Hosting Guidelines under the Documents section and contact the Steering Committee Chair. Preliminary proposals should detail potential venue locations, proposed dates, local organizing committee chairs, accessibility, and tentative budgets.",
     "linkLabel": "View Hosting Guidelines"
-  },
-  {
-    "id": "sc-news-2026-04",
-    "date": "2026-05-31",
-    "title": "ISSRE 2026 Keynotes Announced",
-    "category": "Announcement",
-    "summary": "We are proud to announce the distinguished Keynote Speakers for ISSRE 2026 in Cyprus: Prof. Don Syme (GitHub Next) and Prof. Paolo Tonella (USI).",
-    "content": "We are excited to share the distinguished Keynote Speakers for the upcoming IEEE International Symposium on Software Reliability Engineering (ISSRE 2026) in Paphos, Cyprus:\n\nProf. Don Syme (GitHub Next & King's College London)\n  • Title: The Agentic Repository Automation Revolution\n  • Overview: Exploring Continuous AI (CAI) in repository automation, AI-assisted code improvement, performance engineering, and automated formal verification.\n\nProf. Paolo Tonella (Università della Svizzera italiana - USI)\n  • Title: AI Testing: What have we learned? Where are we heading?\n  • Overview: Analyzing the exponential growth of deep learning model testing, test adequacy assessment, model-level vs. system-level failures, and quality evaluation of LLM-generated code.\n\nJoin us in Cyprus this October to attend these keynotes and meet the speakers!",
-    "linkLabel": "Visit ISSRE 2026",
-    "link": "https://cyprusconferences.org/issre2026/keynote-speakers/"
   },
   {
     "id": "sc-news-2026-02",
