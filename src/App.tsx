@@ -522,18 +522,16 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
               <div
                 key={item.id}
                 onClick={() => item.content && setSelectedNews(item)}
-                className={`glass-card p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group ${
-                  item.content ? 'cursor-pointer' : ''
-                }`}
+                className={`glass-card p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group ${item.content ? 'cursor-pointer' : ''
+                  }`}
               >
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${
-                      item.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                      item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                      item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                      'bg-blue-100 text-blue-800'
-                    }`}>
+                    <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${item.category === 'Call' ? 'bg-amber-100 text-amber-800' :
+                        item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                          item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                            'bg-blue-100 text-blue-800'
+                      }`}>
                       {item.category}
                     </span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
@@ -631,12 +629,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             </button>
 
             <div className="flex items-center gap-2.5 mb-4">
-              <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${
-                selectedNews.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                'bg-blue-100 text-blue-800'
-              }`}>
+              <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${selectedNews.category === 'Call' ? 'bg-amber-100 text-amber-800' :
+                  selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                    selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                      'bg-blue-100 text-blue-800'
+                }`}>
                 {selectedNews.category}
               </span>
               <span className="text-xs text-slate-400 font-semibold">{new Date(selectedNews.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
@@ -738,53 +735,53 @@ function EditionsView() {
           const isUpcoming = conf.year > currentYear;
           const isCurrent = conf.year === currentYear;
           return (
-          <div key={conf.year} className={`glass-card p-6 hover:shadow-md group ${isUpcoming ? 'border-accent/30' : isCurrent ? 'border-primary/30' : ''}`}>
-            <div className="flex justify-between items-start mb-4">
-              <span className="text-3xl font-bold text-slate-900">{conf.year}</span>
-              {isUpcoming && (
-                <span className="text-[9px] font-bold uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full">
-                  Upcoming
-                </span>
-              )}
-              {isCurrent && (
-                <span className="text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">
-                  Current
-                </span>
-              )}
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-slate-600">
-                <MapPin size={16} className="text-primary" />
-                <span className="text-sm font-medium">{conf.location}</span>
+            <div key={conf.year} className={`glass-card p-6 hover:shadow-md group ${isUpcoming ? 'border-accent/30' : isCurrent ? 'border-primary/30' : ''}`}>
+              <div className="flex justify-between items-start mb-4">
+                <span className="text-3xl font-bold text-slate-900">{conf.year}</span>
+                {isUpcoming && (
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                    Upcoming
+                  </span>
+                )}
+                {isCurrent && (
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                    Current
+                  </span>
+                )}
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Calendar size={16} className="text-primary" />
-                <span className="text-sm font-medium">{conf.dates}</span>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-slate-600">
+                  <MapPin size={16} className="text-primary" />
+                  <span className="text-sm font-medium">{conf.location}</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-600">
+                  <Calendar size={16} className="text-primary" />
+                  <span className="text-sm font-medium">{conf.dates}</span>
+                </div>
+              </div>
+              <div className="mt-6 pt-6 border-t border-slate-100 flex gap-4">
+                {conf.websiteUrl && (
+                  <a
+                    href={conf.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+                  >
+                    <Globe size={12} /> Website
+                  </a>
+                )}
+                {conf.proceedingsUrl && (
+                  <a
+                    href={conf.proceedingsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold text-slate-600 hover:text-primary flex items-center gap-1"
+                  >
+                    <BookOpen size={12} /> Proceedings
+                  </a>
+                )}
               </div>
             </div>
-            <div className="mt-6 pt-6 border-t border-slate-100 flex gap-4">
-              {conf.websiteUrl && (
-                <a
-                  href={conf.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
-                >
-                  <Globe size={12} /> Website
-                </a>
-              )}
-              {conf.proceedingsUrl && (
-                <a
-                  href={conf.proceedingsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-slate-600 hover:text-primary flex items-center gap-1"
-                >
-                  <BookOpen size={12} /> Proceedings
-                </a>
-              )}
-            </div>
-          </div>
           );
         })}
       </div>
