@@ -321,6 +321,16 @@ export const AWARDS: Award[] = [
 
 export const CONFERENCES: Conference[] = [
   {
+    year: 2029,
+    location: 'Sydney, Australia',
+    dates: 'TBD',
+  },
+  {
+    year: 2028,
+    location: 'Coimbra, Portugal',
+    dates: 'TBD',
+  },
+  {
     year: 2027,
     location: 'Macau',
     dates: 'TBD',
