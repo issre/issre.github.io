@@ -1329,7 +1329,7 @@ function CommitteeView() {
     { name: 'Katerina Goseva-Popstojanova', affiliation: 'West Virginia University', country: 'USA', committeeType: 'Steering Committee', image: 'people/katerina_goseva_popstojanova.jpg', website: 'https://directory.statler.wvu.edu/faculty-staff-directory/katerina-goseva-popstojanova' },
     { name: 'Leonardo Mariani', affiliation: 'University of Milano - Bicocca', country: 'Italy', committeeType: 'Steering Committee', image: 'people/leonardo_mariani.jpg', website: 'https://en.unimib.it/leonardo-mariani' },
     { name: 'Hélène Waeselynck', affiliation: 'LAAS-CNRS', country: 'France', committeeType: 'Steering Committee', image: 'people/helene_waeselynck.jpg', website: 'https://homepages.laas.fr/waeselyn/' },
-    { name: 'Ganesh Pai', affiliation: 'NASA Ames Research Center', country: 'USA', committeeType: 'Steering Committee', image: 'people/ganesh_pai.jpg', website: 'https://gjp.bitbucket.io' },
+    { name: 'Ganesh Pai', affiliation: 'KBR / NASA Ames Research Center', country: 'USA', committeeType: 'Steering Committee', image: 'people/ganesh_pai.jpg', website: 'https://gjp.bitbucket.io' },
   ];
 
   const advisoryBoard = [
