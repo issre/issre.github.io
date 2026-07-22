@@ -563,6 +563,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                           onNavigate('documents');
                         } else if (item.linkLabel === 'Go to Committees') {
                           onNavigate('committees');
+                        } else if (item.linkLabel === 'View Editions') {
+                          onNavigate('editions');
                         } else if (item.link) {
                           window.open(item.link, '_blank');
                         }
@@ -657,6 +659,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                       onNavigate('documents');
                     } else if (selectedNews.linkLabel === 'Go to Committees') {
                       onNavigate('committees');
+                    } else if (selectedNews.linkLabel === 'View Editions') {
+                      onNavigate('editions');
                     } else if (selectedNews.link) {
                       window.open(selectedNews.link, '_blank');
                     }

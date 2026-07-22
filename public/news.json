@@ -1,5 +1,15 @@
 [
   {
+    "id": "sc-news-2026-05",
+    "date": "2026-07-22",
+    "title": "ISSRE 2028 and 2029 Host Locations Announced",
+    "category": "Announcement",
+    "summary": "The ISSRE Steering Committee has officially announced the host locations for the upcoming editions of the symposium: Coimbra, Portugal (ISSRE 2028) and Sydney, Australia (ISSRE 2029).",
+    "content": "The IEEE International Symposium on Software Reliability Engineering (ISSRE) Steering Committee is pleased to announce the selection of host locations for the 39th and 40th editions of the symposium:\n\n• ISSRE 2028: Coimbra, Portugal. The symposium returns to this historic university city, a renowned hub of software engineering and dependability research in Europe.\n• ISSRE 2029: Sydney, Australia. The 40th anniversary edition of ISSRE will be held in the southern hemisphere, bringing the software reliability community to Australia.\n\nWe congratulate both local organizing committees and look forward to two exceptional editions!",
+    "linkLabel": "View Editions",
+    "link": "#"
+  },
+  {
     "id": "sc-news-2026-04",
     "date": "2026-05-31",
     "title": "ISSRE 2026 Keynotes Announced",
