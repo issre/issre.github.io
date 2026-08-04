@@ -333,7 +333,7 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2027,
     location: 'Macau',
-    dates: 'TBD',
+    dates: 'October 19-22, 2027',
   },
   {
     year: 2026,
