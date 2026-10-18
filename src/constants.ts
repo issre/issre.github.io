@@ -3,6 +3,27 @@ import { Award, Conference, HighlightPaper } from './types';
 export const AWARDS: Award[] = [
   // Test of Time Awards
   {
+    id: 'tot-2026',
+    year: 2026,
+    type: 'Test of Time',
+    title: 'Experience Report: System Log Analysis for Anomaly Detection',
+    authors: ['Shilin He', 'Jieming Zhu', 'Pinjia He', 'Michael R. Lyu'],
+    venue: 'ISSRE 2016',
+    url: 'https://cyprusconferences.org/issre2026/awards/',
+    paperUrl: 'https://doi.org/10.1109/ISSRE.2016.21'
+  },
+  {
+    id: 'tot-2026-runner-up',
+    year: 2026,
+    type: 'Test of Time',
+    title: 'Anomaly Detection and Root Cause Localization in Virtual Network Functions',
+    authors: ['Carla Sauvanaud', 'Kahina Lazri', 'Mohamed Kaâniche', 'Karama Kanoun'],
+    venue: 'ISSRE 2016',
+    runnerUp: true,
+    url: 'https://cyprusconferences.org/issre2026/awards/',
+    paperUrl: 'https://doi.org/10.1109/ISSRE.2016.32'
+  },
+  {
     id: 'tot-2025',
     year: 2025,
     type: 'Test of Time',
@@ -41,6 +62,101 @@ export const AWARDS: Award[] = [
     venue: 'ISSRE 2012',
     url: 'https://issre2022.github.io',
     paperUrl: 'https://ieeexplore.ieee.org/document/6405375/'
+  },
+
+  // 2026 Distinguished Paper Awards & Best Artifact
+  {
+    id: 'dp-2026-research-1',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'Calibration Without Comprehension: Diagnosing the Limits of Fine-Tuning LLMs for Vulnerability Detection in Systems Software',
+    authors: ['Arastoo Zibaeirad', 'Marco Vieira'],
+    track: 'Research',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-research-2',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'ProvScope: A tool to assist cybersecurity analysts in identifying information flows in complex systems',
+    authors: ['Loic Robert', 'Vincent Nicomette', 'Eric Lacombe', 'Marie-José Huguet', 'Emmanuel Hebrard'],
+    track: 'Research',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-research-3',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'Resilient Page Table Management under ECC-uncorrectable Memory Errors',
+    authors: ['Kazuki Takeda', 'Hiroshi Yamada'],
+    track: 'Research',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-research-4',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'RotDroid: Cross-Orientation State Equivalence Testing for Detecting GUI Rotation Bugs in Android Apps',
+    authors: ['Mengdi Qin', 'Bo Jiang'],
+    track: 'Research',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-research-5',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'When Agents Fail: A Comprehensive Study of Bugs in LLM Agents with Automated Labeling',
+    authors: ['Niful Islam', 'Ragib Shahriar Ayon', 'Deepak George Thomas', 'Shibbir Ahmed', 'Mohammad Wardat'],
+    track: 'Research',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-rene-1',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'From Benchmark Accuracy to Diagnostic Boundaries: A Time-Aware Replication of DEST',
+    authors: [
+      'Hang Cui', 'Cenjie Hu', 'Changhua Pei', 'Juncheng Hu', 'Haotian Si',
+      'Zihan Liu', 'Ke Xiang', 'Yuxuan Li', 'Quan Zhou', 'Xiaohui Nie',
+      'Zexin Wang', 'Jingjing Li', 'Dan Pei', 'Gaogang Xie'
+    ],
+    track: 'RENE',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-industry-1',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'Bridging the Mitigation Gap: A Taxonomy-Driven Empirical Study of Incident Recovery in Production LLM Serving',
+    authors: ['Bhala Ranganathan', 'Minghua Ma'],
+    track: 'Industry',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-industry-2',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'Making Deployments Safe at Meta: Health Checks for Continuous Change-Safety',
+    authors: ['Prakash Kl', 'Anton Korenkov', 'Uttam Thakore', 'Christopher Hegre'],
+    track: 'Industry',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'dp-2026-industry-3',
+    year: 2026,
+    type: 'Distinguished Paper',
+    title: 'The Prover Is the Judge: Verified Security Software from AI Coding Agents in Ada/SPARK',
+    authors: ['Tobias Philipp'],
+    track: 'Industry',
+    url: 'https://cyprusconferences.org/issre2026/awards/'
+  },
+  {
+    id: 'art-2026-1',
+    year: 2026,
+    type: 'Best Artifact',
+    title: 'SIEVE: Hybrid Hardware/Software Detection of Multi-Bit Errors in Random-Access Memory',
+    authors: ['Robin Thunig', 'Christoph Borchert', 'Urs Kober', 'Horst Schirmeier'],
+    url: 'https://cyprusconferences.org/issre2026/awards/'
   },
 
   // Best Research Paper Awards
@@ -323,27 +439,38 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2029,
     location: 'Sydney, Australia',
+    generalChairs: ['Yintong Huo', 'James Xi Zheng'],
     dates: 'TBD',
   },
   {
     year: 2028,
     location: 'Coimbra, Portugal',
+    generalChairs: ['Nuno Laranjeiro'],
     dates: 'TBD',
   },
   {
     year: 2027,
     location: 'Macau',
+    generalChairs: ['Tao Zhang', 'Barbara Gallina'],
+    researchChairs: ['Weiyi Shang', 'Naghmeh Ivaki'],
+    industryChairs: ['Nuno Silva', 'Guangtai Liang', 'Yajin Zhou'],
     dates: 'October 19-22, 2027',
   },
   {
     year: 2026,
     location: 'Paphos, Cyprus',
+    generalChairs: ['George Papadopoulos', 'Leonardo Mariani'],
+    researchChairs: ['Domenico Cotroneo', 'Jie M. Zhang'],
+    industryChairs: ['Sigrid Eldh', 'Jinyang Liu'],
     dates: 'October 26-29, 2026',
     websiteUrl: 'https://cyprusconferences.org/issre2026/'
   },
   {
     year: 2025,
     location: 'São Paulo, Brazil',
+    generalChairs: ['Andrey Brito', 'Regina Moraes'],
+    researchChairs: ['Catia Trubiani', 'Yulei Sui'],
+    industryChairs: ['Ganesh Pai', 'Daniel Fireman'],
     dates: 'October 27-30, 2025',
     websiteUrl: 'https://issre.github.io/2025/',
     proceedingsUrl: 'https://www.computer.org/csdl/proceedings/issre/2025/2bDyEwkBbUI'
@@ -351,6 +478,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2024,
     location: 'Tsukuba, Japan',
+    generalChairs: ['Fumio Machida'],
+    researchChairs: ['Lei Ma', 'Roberto Pietrantuono'],
+    industryChairs: ['Javier Alonso', 'Susumu Tokumoto'],
     dates: 'October 28-31, 2024',
     websiteUrl: 'https://issre.github.io/2024/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/10771156/proceeding'
@@ -358,6 +488,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2023,
     location: 'Florence, Italy',
+    generalChairs: ['Enrico Vicario'],
+    researchChairs: ['Patrizio Pelliccione', 'Nuno Laranjeiro'],
+    industryChairs: ['Saurabh Jha'],
     dates: 'October 9-12, 2023',
     websiteUrl: 'https://issre.github.io/2023/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/10299935/proceeding'
@@ -365,6 +498,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2022,
     location: 'Charlotte, NC, USA',
+    generalChairs: ['Katerina Goseva-Popstojanova', 'Bojan Cukic'],
+    researchChairs: ['Fabrizio Pastore', 'Lingming Zhang'],
+    industryChairs: ['Uttam Thakore'],
     dates: 'October 31 - November 3, 2022',
     websiteUrl: 'https://issre2022.github.io/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/9978763/proceeding'
@@ -372,6 +508,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2021,
     location: 'Wuhan, China (Virtual)',
+    generalChairs: ['Zhi Jin', 'Xuandong Li', 'Jianwen Xiang'],
+    researchChairs: ['Leonardo Mariani', 'Ting Liu'],
+    industryChairs: ['Chunhui Yang', 'Guangtai Liang', 'Valerio Formicola'],
     dates: 'October 25-28, 2021',
     websiteUrl: 'https://2021.issre.net/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/9700160/proceeding'
@@ -379,6 +518,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2020,
     location: 'Coimbra, Portugal (Virtual)',
+    generalChairs: ['Marco Vieira', 'Henrique Madeira'],
+    researchChairs: ['Nuno Antunes', 'Zheng Zheng'],
+    industryChairs: ['Antonio Pecchia', 'Valerio Formicola'],
     dates: 'October 12-15, 2020',
     websiteUrl: 'https://2020.issre.net/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/9250925/proceeding'
@@ -386,12 +528,18 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2019,
     location: 'Berlin, Germany',
+    generalChairs: ['Katinka Wolter', 'Ina Schieferdecker'],
+    researchChairs: ['Barbara Gallina', 'Michel Cukier'],
+    industryChairs: ['Catello Di Martino', 'Rakshith Amarnath'],
     dates: 'October 28-31, 2019',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/8967509/proceeding'
   },
   {
     year: 2018,
     location: 'Memphis, TN, USA',
+    generalChairs: ['Bojan Cukic', 'Robin Poston'],
+    researchChairs: ['Sudipto Ghosh', 'Roberto Natella'],
+    industryChairs: ['Catello Di Martino', 'Harigovind Ramasamy', 'Mike Sayres'],
     dates: 'October 15-18, 2018',
     websiteUrl: 'https://2018.issre.net/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/8536838/proceeding'
@@ -399,6 +547,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2017,
     location: 'Toulouse, France',
+    generalChairs: ['Hélène Waeselynck'],
+    researchChairs: ['Ilir Gashi', 'Karthik Pattabiraman'],
+    industryChairs: ['Sigrid Eldh', 'Keun Soo Yim'],
     dates: 'October 23-26, 2017',
     websiteUrl: 'https://2017.issre.net/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/8108705/proceeding'
@@ -406,6 +557,9 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2016,
     location: 'Ottawa, ON, Canada',
+    generalChairs: ['Yvan Labiche'],
+    researchChairs: ['Alexander Romanovsky', 'Elena Troubitsyna'],
+    industryChairs: ['Sigrid Eldh', 'Brian Robinson'],
     dates: 'October 23-27, 2016',
     websiteUrl: 'https://2016.issre.net/',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/7774240/proceeding'
@@ -413,6 +567,8 @@ export const CONFERENCES: Conference[] = [
   {
     year: 2015,
     location: 'Gaithersburg, MD, USA',
+    generalChairs: ['Jeff Voas', 'Irena Bojanova'],
+    researchChairs: ['Marco Vieira', 'Katinka Wolter'],
     dates: 'November 2-5, 2015',
     proceedingsUrl: 'https://ieeexplore.ieee.org/xpl/conhome/7374093/proceeding'
   },

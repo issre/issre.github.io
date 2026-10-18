@@ -17,7 +17,7 @@
 }
 
 .glass-card {
-  @apply bg-white/80 backdrop-blur-sm border border-slate-200 shadow-sm rounded-2xl;
+  @apply bg-slate-100 border border-slate-300 shadow-sm rounded-2xl;
 }
 
 .section-title {

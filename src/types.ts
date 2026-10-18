@@ -1,7 +1,7 @@
 export interface Award {
   id: string;
   year: number;
-  type: 'Test of Time' | 'Best Paper';
+  type: 'Test of Time' | 'Best Paper' | 'Distinguished Paper' | 'Best Artifact';
   title: string;
   authors: string[];
   venue?: string;
@@ -9,7 +9,7 @@ export interface Award {
   runnerUp?: boolean;
   url?: string;
   paperUrl?: string;
-  track?: 'Research' | 'Industry';
+  track?: 'Research' | 'Industry' | 'RENE';
 }
 
 export interface Conference {
@@ -18,6 +18,9 @@ export interface Conference {
   dates: string;
   websiteUrl?: string;
   proceedingsUrl?: string;
+  generalChairs?: string[];
+  researchChairs?: string[];
+  industryChairs?: string[];
 }
 
 export type HighlightCategory =

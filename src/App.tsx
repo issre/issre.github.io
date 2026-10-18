@@ -14,6 +14,7 @@ import {
   MapPin,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   Menu,
   X,
   Search,
@@ -22,10 +23,14 @@ import {
   Globe,
   FileText,
   Newspaper,
-  Bell
+  Bell,
+  Code2,
+  FileCheck,
+  Building
 } from 'lucide-react';
 import { AWARDS, CONFERENCES, HIGHLIGHT_PAPERS } from './constants';
 import { Award, Conference, HighlightPaper, HighlightCategory, SCNewsItem } from './types';
+import { Awards2026Modal } from './Awards2026Modal';
 
 interface SponsorLogoProps {
   srcs: string[];
@@ -516,24 +521,27 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
               </p>
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {news.slice(0, showAllNews ? undefined : 6).map((item) => (
+            {news.slice(0, showAllNews ? undefined : 6).map((item) => {
+              const is2026Awards = item.id === 'sc-news-2026-06' || item.title.includes('2026 Awards');
+              return (
               <div
                 key={item.id}
                 onClick={() => item.content && setSelectedNews(item)}
                 className={`glass-card p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group ${item.content ? 'cursor-pointer' : ''
-                  }`}
+                  } ${is2026Awards ? 'border-primary/40 ring-1 ring-primary/20 bg-gradient-to-br from-slate-100 via-slate-100 to-blue-100/60 shadow-sm' : ''}`}
               >
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${item.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                      item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                        item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                          'bg-blue-100 text-blue-800'
-                      }`}>
-                      {item.category}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${item.category === 'Call' ? 'bg-amber-100 text-amber-800' :
+                        item.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                          item.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                            'bg-blue-100 text-blue-800'
+                        }`}>
+                        {item.category}
+                      </span>
+                    </div>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
                       <Calendar size={10} /> {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
@@ -548,10 +556,10 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100/50 flex items-center justify-between mt-auto">
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-between mt-auto">
                   {item.content ? (
                     <button className="text-xs font-bold text-primary hover:text-accent flex items-center gap-1 transition-colors uppercase tracking-wider group-hover:underline cursor-pointer">
-                      Read Details <ChevronRight size={14} />
+                      {is2026Awards ? 'Explore Awards' : 'Read Details'} <ChevronRight size={14} />
                     </button>
                   ) : item.linkLabel ? (
                     <button
@@ -576,7 +584,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                   ) : null}
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
 
           {news.length > 6 && (
@@ -620,60 +629,68 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
 
       {/* News Modal */}
       {selectedNews && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
-          <div className="bg-white border border-slate-200/80 rounded-2xl max-w-2xl w-full p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto transform transition-all duration-300">
-            <button
-              onClick={() => setSelectedNews(null)}
-              aria-label="Close modal"
-              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
-            >
-              <X size={20} />
-            </button>
+        selectedNews.id === 'sc-news-2026-06' || selectedNews.title.includes('2026 Awards') ? (
+          <Awards2026Modal
+            news={selectedNews}
+            onClose={() => setSelectedNews(null)}
+            onNavigate={onNavigate}
+          />
+        ) : (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
+            <div className="bg-white border border-slate-200/80 rounded-2xl max-w-2xl w-full p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto transform transition-all duration-300">
+              <button
+                onClick={() => setSelectedNews(null)}
+                aria-label="Close modal"
+                className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+              >
+                <X size={20} />
+              </button>
 
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${selectedNews.category === 'Call' ? 'bg-amber-100 text-amber-800' :
-                selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
-                  selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
-                    'bg-blue-100 text-blue-800'
-                }`}>
-                {selectedNews.category}
-              </span>
-              <span className="text-xs text-slate-400 font-semibold">{new Date(selectedNews.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-            </div>
-
-            <h3 className="font-serif text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
-              {selectedNews.title}
-            </h3>
-
-            <div className="text-slate-650 text-sm md:text-base leading-relaxed space-y-4 whitespace-pre-wrap font-sans">
-              {selectedNews.content}
-            </div>
-
-            {selectedNews.linkLabel && (
-              <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                <button
-                  onClick={() => {
-                    if (selectedNews.linkLabel === 'View Hosting Guidelines') {
-                      onNavigate('hosting');
-                    } else if (selectedNews.linkLabel === 'Go to Documents') {
-                      onNavigate('documents');
-                    } else if (selectedNews.linkLabel === 'Go to Committees') {
-                      onNavigate('committees');
-                    } else if (selectedNews.linkLabel === 'View Editions') {
-                      onNavigate('editions');
-                    } else if (selectedNews.link) {
-                      window.open(selectedNews.link, '_blank');
-                    }
-                    setSelectedNews(null);
-                  }}
-                  className="px-6 py-2.5 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-accent hover:text-white transition-all duration-200 flex items-center gap-2 cursor-pointer font-sans"
-                >
-                  {selectedNews.linkLabel} <ChevronRight size={14} />
-                </button>
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md ${selectedNews.category === 'Call' ? 'bg-amber-100 text-amber-800' :
+                  selectedNews.category === 'Governance' ? 'bg-emerald-100 text-emerald-800' :
+                    selectedNews.category === 'Awards' ? 'bg-purple-100 text-purple-800' :
+                      'bg-blue-100 text-blue-800'
+                  }`}>
+                  {selectedNews.category}
+                </span>
+                <span className="text-xs text-slate-400 font-semibold">{new Date(selectedNews.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
               </div>
-            )}
+
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
+                {selectedNews.title}
+              </h3>
+
+              <div className="text-slate-650 text-sm md:text-base leading-relaxed space-y-4 whitespace-pre-wrap font-sans">
+                {selectedNews.content}
+              </div>
+
+              {selectedNews.linkLabel && (
+                <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                  <button
+                    onClick={() => {
+                      if (selectedNews.linkLabel === 'View Hosting Guidelines') {
+                        onNavigate('hosting');
+                      } else if (selectedNews.linkLabel === 'Go to Documents') {
+                        onNavigate('documents');
+                      } else if (selectedNews.linkLabel === 'Go to Committees') {
+                        onNavigate('committees');
+                      } else if (selectedNews.linkLabel === 'View Editions') {
+                        onNavigate('editions');
+                      } else if (selectedNews.link) {
+                        window.open(selectedNews.link, '_blank');
+                      }
+                      setSelectedNews(null);
+                    }}
+                    className="px-6 py-2.5 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-accent hover:text-white transition-all duration-200 flex items-center gap-2 cursor-pointer font-sans"
+                  >
+                    {selectedNews.linkLabel} <ChevronRight size={14} />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )
       )}
     </div>
   );
@@ -686,8 +703,11 @@ function EditionsView() {
   const decades = ['All', '2020s', '2010s', '2000s', '90s'];
 
   const filteredConferences = CONFERENCES.filter(conf => {
+    const q = searchTerm.toLowerCase();
     const matchesSearch = conf.year.toString().includes(searchTerm) ||
-      conf.location.toLowerCase().includes(searchTerm.toLowerCase());
+      conf.location.toLowerCase().includes(q) ||
+      [...(conf.generalChairs ?? []), ...(conf.researchChairs ?? []), ...(conf.industryChairs ?? [])]
+        .some(name => name.toLowerCase().includes(q));
 
     if (activeDecade === 'All') return matchesSearch;
     if (activeDecade === '2020s') return matchesSearch && conf.year >= 2020;
@@ -724,7 +744,7 @@ function EditionsView() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input
               type="text"
-              placeholder="Search locations..."
+              placeholder="Search locations or chairs…"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20"
@@ -739,21 +759,21 @@ function EditionsView() {
           const isUpcoming = conf.year > currentYear;
           const isCurrent = conf.year === currentYear;
           return (
-            <div key={conf.year} className={`glass-card p-6 hover:shadow-md group ${isUpcoming ? 'border-accent/30' : isCurrent ? 'border-primary/30' : ''}`}>
+            <div key={conf.year} className={`glass-card p-6 hover:shadow-md group flex flex-col ${isUpcoming ? 'border-primary/40' : isCurrent ? 'border-slate-400' : ''}`}>
               <div className="flex justify-between items-start mb-4">
                 <span className="text-3xl font-bold text-slate-900">{conf.year}</span>
                 {isUpcoming && (
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">
                     Upcoming
                   </span>
                 )}
                 {isCurrent && (
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-slate-900 px-2.5 py-1 rounded-full">
                     Current
                   </span>
                 )}
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-2 text-slate-600">
                   <MapPin size={16} className="text-primary" />
                   <span className="text-sm font-medium">{conf.location}</span>
@@ -762,8 +782,34 @@ function EditionsView() {
                   <Calendar size={16} className="text-primary" />
                   <span className="text-sm font-medium">{conf.dates}</span>
                 </div>
+                {(() => {
+                  const roles: [string, string[] | undefined][] = [
+                    ['General', conf.generalChairs],
+                    ['Research PC', conf.researchChairs],
+                    ['Industry PC', conf.industryChairs],
+                  ];
+                  const present = roles.filter(([, names]) => names && names.length > 0);
+                  if (present.length === 0) return null;
+                  return (
+                    <div className="flex items-start gap-2 text-slate-600">
+                      <Users size={16} className="text-primary flex-shrink-0 mt-0.5" />
+                      <dl className="text-sm grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
+                        {present.map(([role, names]) => (
+                          <React.Fragment key={role}>
+                            <dt className="text-slate-400 whitespace-nowrap self-start">{role} Chair{names!.length > 1 ? 's' : ''}</dt>
+                            <dd className="font-medium">
+                              {names!.map(name => (
+                                <div key={name}>{name}</div>
+                              ))}
+                            </dd>
+                          </React.Fragment>
+                        ))}
+                      </dl>
+                    </div>
+                  );
+                })()}
               </div>
-              <div className="mt-6 pt-6 border-t border-slate-100 flex gap-4">
+              <div className="mt-auto pt-6 border-t border-slate-200 flex gap-4">
                 {conf.websiteUrl && (
                   <a
                     href={conf.websiteUrl}
@@ -806,6 +852,54 @@ interface AwardsViewProps {
 const AwardsView: React.FC<AwardsViewProps> = ({ initialFilter }) => {
   const [awardTypeGroup, setAwardTypeGroup] = useState<'annual' | 'highlights'>('annual');
   const [filter, setFilter] = useState<string>('All');
+  const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
+
+  // Reset manual expand/collapse whenever the filter changes
+  useEffect(() => { setExpandedYears(new Set()); }, [filter]);
+
+  const awardLabel = (award: Award) =>
+    award.type === 'Best Artifact'
+      ? 'Best Artifact'
+      : award.type === 'Distinguished Paper'
+        ? `${award.track ? `${award.track} Track ` : ''}Distinguished Paper`
+        : award.type === 'Best Paper'
+          ? (award.track ? `Best ${award.track} Paper` : 'Best Paper')
+          : award.type;
+
+  const pluralizeLabel = (label: string) =>
+    label === 'Test of Time' ? 'Test of Time Awards' : `${label}s`;
+
+  const awardAccent = (award: Award) =>
+    award.type === 'Test of Time'
+      ? { text: 'text-accent', border: 'border-l-accent', line: 'bg-accent/30' }
+      : award.type === 'Best Artifact'
+        ? { text: 'text-cyan-700', border: 'border-l-cyan-700', line: 'bg-cyan-700/30' }
+        : award.track === 'RENE'
+          ? { text: 'text-purple-700', border: 'border-l-purple-700', line: 'bg-purple-700/30' }
+          : award.track === 'Industry'
+            ? { text: 'text-emerald-600', border: 'border-l-emerald-600', line: 'bg-emerald-600/30' }
+            : { text: 'text-primary', border: 'border-l-primary', line: 'bg-primary/30' };
+
+  const awardBadgeColor = (award: Award) =>
+    award.type === 'Test of Time' ? 'bg-accent' :
+    award.type === 'Best Artifact' ? 'bg-cyan-700' :
+    award.track === 'RENE' ? 'bg-purple-700' :
+    award.track === 'Industry' ? 'bg-emerald-600' :
+    'bg-primary';
+
+  const awardIconClasses = (award: Award) =>
+    award.type === 'Test of Time' ? 'bg-accent/10 text-accent' :
+    award.type === 'Best Artifact' ? 'bg-cyan-500/10 text-cyan-700' :
+    award.track === 'RENE' ? 'bg-purple-500/10 text-purple-600' :
+    award.track === 'Industry' ? 'bg-emerald-500/10 text-emerald-600' :
+    'bg-primary/10 text-primary';
+
+  const AwardGlyph = ({ award, size }: { award: Award; size: number }) =>
+    award.type === 'Test of Time' ? <Trophy size={size} /> :
+    award.type === 'Best Artifact' ? <Code2 size={size} /> :
+    award.track === 'RENE' ? <FileCheck size={size} /> :
+    award.track === 'Industry' ? <Building size={size} /> :
+    <AwardIcon size={size} />;
 
   useEffect(() => {
     if (initialFilter === '30-Year Highlights') {
@@ -821,26 +915,61 @@ const AwardsView: React.FC<AwardsViewProps> = ({ initialFilter }) => {
     ? [...AWARDS]
     : AWARDS.filter(a => {
       if (filter === 'Test of Time') return a.type === 'Test of Time';
-      if (filter === 'Best Research Paper') return a.type === 'Best Paper' && a.track === 'Research';
-      if (filter === 'Best Industry Paper') return a.type === 'Best Paper' && a.track === 'Industry';
+      if (filter === 'Research Track' || filter === 'Best Research Paper') {
+        return (a.type === 'Best Paper' || a.type === 'Distinguished Paper') && a.track === 'Research';
+      }
+      if (filter === 'Industry Track' || filter === 'Best Industry Paper') {
+        return (a.type === 'Best Paper' || a.type === 'Distinguished Paper') && a.track === 'Industry';
+      }
+      if (filter === 'RENE Track') {
+        return a.track === 'RENE';
+      }
+      if (filter === 'Artifacts' || filter === 'Best Artifact') {
+        return a.type === 'Best Artifact';
+      }
       return false;
     })).sort((a, b) => {
       if (a.year !== b.year) return b.year - a.year;
-      // For same year, prioritize winners over runner-ups
+      // Prioritize Test of Time Winner over Runner-Up, and Test of Time over other awards
+      if (a.type === 'Test of Time' && b.type !== 'Test of Time') return -1;
+      if (a.type !== 'Test of Time' && b.type === 'Test of Time') return 1;
       if (a.runnerUp && !b.runnerUp) return 1;
       if (!a.runnerUp && b.runnerUp) return -1;
-      return a.type.localeCompare(b.type);
+      // Sort priority by track: Research -> RENE -> Industry -> Artifacts
+      const trackOrder: Record<string, number> = { Research: 1, RENE: 2, Industry: 3 };
+      const aOrder = a.type === 'Best Artifact' ? 4 : (a.track ? trackOrder[a.track] || 5 : 5);
+      const bOrder = b.type === 'Best Artifact' ? 4 : (b.track ? trackOrder[b.track] || 5 : 5);
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      return a.title.localeCompare(b.title);
+    });
+
+  // Group by year (already sorted newest first). All years start expanded; clicking a header collapses it.
+  const EXPANDED_BY_DEFAULT = Infinity;
+  const yearGroups = filteredAwards.reduce<{ year: number; awards: Award[] }[]>((groups, award) => {
+    const last = groups[groups.length - 1];
+    if (last && last.year === award.year) last.awards.push(award);
+    else groups.push({ year: award.year, awards: [award] });
+    return groups;
+  }, []);
+
+  const toggleYear = (year: number) =>
+    setExpandedYears(prev => {
+      const next = new Set(prev);
+      if (next.has(year)) next.delete(year); else next.add(year);
+      return next;
     });
 
   return (
     <div
     >
-      <div className="mb-16 text-center max-w-2xl mx-auto">
+      <div className="mb-12 text-center max-w-2xl mx-auto">
         <h2 className="section-title mb-4">Hall of Fame</h2>
         <p className="text-slate-500">
           Celebrating excellence and enduring impact in software reliability engineering research.
         </p>
       </div>
+
+
 
       {/* Top Group Switcher */}
       <div className="flex justify-center mb-12">
@@ -869,11 +998,11 @@ const AwardsView: React.FC<AwardsViewProps> = ({ initialFilter }) => {
       {/* Filter Tabs for Annual Awards */}
       {awardTypeGroup === 'annual' && (
         <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {['All', 'Test of Time', 'Best Research Paper', 'Best Industry Paper'].map((cat) => (
+          {['All', 'Test of Time', 'Research Track', 'Industry Track', 'RENE Track', 'Artifacts'].map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-full text-xs font-bold ${filter === cat
+              className={`px-5 py-2 rounded-full text-xs font-bold font-sans transition-all duration-200 cursor-pointer ${filter === cat
                 ? 'bg-slate-900 text-white shadow-lg'
                 : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-400'
                 }`}
@@ -887,81 +1016,111 @@ const AwardsView: React.FC<AwardsViewProps> = ({ initialFilter }) => {
       {awardTypeGroup === 'highlights' ? (
         <HighlightsView />
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-10">
+          {yearGroups.map((group, groupIdx) => {
+            const labels = Array.from(new Set(group.awards.map(awardLabel)));
+            const uniformLabel = labels.length === 1 ? labels[0] : null;
+            const isOpen = groupIdx < EXPANDED_BY_DEFAULT
+              ? !expandedYears.has(group.year)
+              : expandedYears.has(group.year);
+            const count = group.awards.length;
+            const headerAccent = uniformLabel ? awardAccent(group.awards[0]) : null;
 
-          {filteredAwards.map((award) => (
-            <div
-              key={award.id}
-              className="glass-card p-8 relative overflow-hidden group"
-            >
-              {/* Category Badge */}
-              <div className="absolute top-0 right-0 flex overflow-hidden rounded-bl-xl shadow-sm z-10">
-                {award.runnerUp && (
-                  <div className="px-4 py-2 bg-slate-200 text-slate-700 text-[10px] font-bold uppercase tracking-widest">
-                    Runner-up
-                  </div>
-                )}
-                <div className={`px-6 py-2 text-white text-[10px] font-bold uppercase tracking-widest ${award.type === 'Test of Time' ? 'bg-accent' :
-                  award.track === 'Industry' ? 'bg-emerald-600' :
-                    award.type === 'Best Paper' ? 'bg-primary' : 'bg-slate-900'
-                  }`}>
-                  {award.type === 'Best Paper' ? (award.track ? `Best ${award.track} Paper` : 'Best Paper') : award.type}
-                </div>
-              </div>
+            return (
+              <section key={group.year}>
+                {/* Year header */}
+                <button
+                  type="button"
+                  onClick={() => toggleYear(group.year)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center gap-4 mb-4 group/header cursor-pointer text-left"
+                >
+                  <span className="text-3xl font-serif font-bold text-slate-900">{group.year}</span>
+                  <span className={`text-xs font-bold uppercase tracking-widest font-sans ${headerAccent ? headerAccent.text : 'text-slate-400'}`}>
+                    {uniformLabel
+                      ? `${count > 1 ? pluralizeLabel(uniformLabel) : uniformLabel}${count > 1 ? ` · ${count}` : ''}`
+                      : `${count} award${count > 1 ? 's' : ''}`}
+                  </span>
+                  <span className={`flex-grow h-px ${headerAccent ? headerAccent.line : 'bg-slate-200'}`} />
+                  <ChevronDown
+                    size={18}
+                    className={`text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
 
-              <div className="flex flex-col md:flex-row gap-8">
-                <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${award.type === 'Test of Time' ? 'bg-accent/10 text-accent' :
-                    award.track === 'Industry' ? 'bg-emerald-500/10 text-emerald-600' :
-                      award.type === 'Best Paper' ? 'bg-primary/10 text-primary' :
-                        'bg-emerald-500/10 text-emerald-600'
-                    }`}>
-                    <AwardIcon size={32} />
-                  </div>
-                  <div className="mt-4 text-center">
-                    <span className="text-2xl font-serif font-bold text-slate-900">{award.year}</span>
-                  </div>
-                </div>
+                {isOpen && (
+                  <div className="space-y-3">
+                    {group.awards.map((award) => (
+                      <div
+                        key={award.id}
+                        className={`glass-card relative overflow-hidden group p-5 md:p-6 border-l-4 ${awardAccent(award).border}`}
+                      >
+                        {/* Category badge: only when the year mixes award types */}
+                        {(!uniformLabel || award.runnerUp) && (
+                          <div className="absolute top-0 right-0 flex overflow-hidden rounded-bl-xl shadow-sm z-10">
+                            {award.runnerUp && (
+                              <div className="px-3 py-1.5 bg-slate-200 text-slate-700 text-[10px] font-bold uppercase tracking-widest font-sans">
+                                Runner-up
+                              </div>
+                            )}
+                            {!uniformLabel && (
+                              <div className={`px-4 py-1.5 text-white text-[10px] font-bold uppercase tracking-widest font-sans ${awardBadgeColor(award)}`}>
+                                {awardLabel(award)}
+                              </div>
+                            )}
+                          </div>
+                        )}
 
-                <div className="flex-grow">
-                  <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-primary">
-                    {award.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {award.authors.map((author, idx) => (
-                      <span key={idx} className="text-sm font-medium text-slate-600">
-                        {author}{idx < award.authors.length - 1 ? ',' : ''}
-                      </span>
+                        <div className="flex gap-5">
+                          <div className={`flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center ${awardIconClasses(award)}`}>
+                            <AwardGlyph award={award} size={22} />
+                          </div>
+
+                          <div className="flex-grow min-w-0">
+                            <h3 className={`text-lg font-serif font-bold text-slate-900 mb-1.5 leading-snug group-hover:text-primary ${!uniformLabel || award.runnerUp ? 'pr-32 md:pr-48' : ''}`}>
+                              {award.title}
+                            </h3>
+                            <p className="text-sm text-slate-600 mb-3">
+                              {award.authors.join(', ')}
+                            </p>
+
+                            {award.description && (
+                              <p className="text-slate-500 text-sm leading-relaxed mb-3 italic">
+                                "{award.description}"
+                              </p>
+                            )}
+
+                            <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-400">
+                              {award.paperUrl ? (
+                                <a href={award.paperUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-primary hover:underline">
+                                  <BookOpen size={12} /> Paper
+                                </a>
+                              ) : award.url ? (
+                                <a href={award.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-primary hover:underline">
+                                  <BookOpen size={12} /> View Awards Page <ExternalLink size={11} />
+                                </a>
+                              ) : (() => {
+                                const conf = CONFERENCES.find(c => c.year === award.year);
+                                return conf?.proceedingsUrl ? (
+                                  <a href={conf.proceedingsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-primary hover:underline">
+                                    <BookOpen size={12} /> Proceedings
+                                  </a>
+                                ) : null;
+                              })()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
-
-                  {award.description && (
-                    <p className="text-slate-500 text-sm leading-relaxed mb-6 italic">
-                      "{award.description}"
-                    </p>
-                  )}
-
-                  <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-400">
-                    {award.paperUrl ? (
-                      <a href={award.paperUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-primary hover:underline">
-                        <BookOpen size={12} /> Paper
-                      </a>
-                    ) : (() => {
-                      const conf = CONFERENCES.find(c => c.year === award.year);
-                      return conf?.proceedingsUrl ? (
-                        <a href={conf.proceedingsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-primary hover:underline">
-                          <BookOpen size={12} /> Proceedings
-                        </a>
-                      ) : null;
-                    })()}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-
+                )}
+              </section>
+            );
+          })}
         </div>
       )}
+
+
     </div>
   );
 };
@@ -1130,7 +1289,7 @@ function HighlightsView() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 glass-card p-8 flex flex-col justify-between bg-gradient-to-br from-white to-slate-50">
+        <div className="lg:col-span-5 glass-card p-8 flex flex-col justify-between bg-gradient-to-br from-slate-100 to-slate-200/70">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1.5 h-6 rounded-full bg-accent" />
@@ -1168,7 +1327,7 @@ function HighlightsView() {
               </div>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400">
+          <div className="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-slate-400">
             <span>TOTAL POOL: 30 YEARS OF ISSRE</span>
             <span className="text-primary bg-primary/5 px-2.5 py-1 rounded-full uppercase tracking-wider">26 Landmark Papers</span>
           </div>
@@ -1253,7 +1412,7 @@ function HighlightsView() {
             </div>
 
             {/* Venue & Link */}
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <Calendar size={12} className="text-slate-400" />
                 {paper.venue}
@@ -1302,7 +1461,7 @@ function HostingView() {
       </div>
 
       <div className="glass-card p-12 text-center border-dashed border-2">
-        <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
+        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
           <Globe size={40} />
         </div>
         <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4">Coming Soon</h3>
@@ -1386,7 +1545,7 @@ function CommitteeView() {
               setImgError(true);
               setImgLoaded(true);
             }}
-            className={`w-full h-full object-cover transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-full h-full object-cover object-[center_20%] transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         </>
       );
@@ -1416,7 +1575,7 @@ function CommitteeView() {
 
     return (
       <div
-        className="glass-card p-5 pb-4 flex flex-col items-center text-center group hover:bg-slate-50/50 hover:shadow-xl transition-all duration-300 relative h-full"
+        className="glass-card p-5 pb-4 flex flex-col items-center text-center group hover:bg-slate-200/60 hover:shadow-xl transition-all duration-300 relative h-full"
       >
         <ImageWrapper />
 
