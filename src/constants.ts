@@ -455,6 +455,7 @@ export const CONFERENCES: Conference[] = [
     researchChairs: ['Weiyi Shang', 'Naghmeh Ivaki'],
     industryChairs: ['Nuno Silva', 'Guangtai Liang', 'Yajin Zhou'],
     dates: 'October 19-22, 2027',
+    websiteUrl: 'https://conf.researchr.org/home/issre-2027'
   },
   {
     year: 2026,
