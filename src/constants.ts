@@ -435,6 +435,10 @@ export const AWARDS: Award[] = [
   }
 ];
 
+// The edition currently being organised. Drives the home hero and the
+// Current / Upcoming badges on the Editions page.
+export const CURRENT_EDITION_YEAR = 2027;
+
 export const CONFERENCES: Conference[] = [
   {
     year: 2029,

@@ -28,7 +28,7 @@ import {
   FileCheck,
   Building
 } from 'lucide-react';
-import { AWARDS, CONFERENCES, HIGHLIGHT_PAPERS } from './constants';
+import { AWARDS, CONFERENCES, CURRENT_EDITION_YEAR, HIGHLIGHT_PAPERS } from './constants';
 import { Award, Conference, HighlightPaper, HighlightCategory, SCNewsItem } from './types';
 import { Awards2026Modal } from './Awards2026Modal';
 
@@ -468,7 +468,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 text-white text-xs font-bold tracking-widest uppercase mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-accent" />
-            Current Edition: ISSRE 2026
+            Current Edition: ISSRE {CURRENT_EDITION_YEAR}
           </span>
           <h1 className="font-serif text-3xl md:text-5xl font-bold mb-8 leading-tight">
             International Symposium on <span className="text-accent italic">Software Reliability</span> Engineering
@@ -478,12 +478,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
           </p>
           <div className="flex flex-wrap gap-4">
             <a
-              href="https://cyprusconferences.org/issre2026/"
+              href={CONFERENCES.find(c => c.year === CURRENT_EDITION_YEAR)?.websiteUrl ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-accent hover:text-white flex items-center gap-2 group"
             >
-              ISSRE 2026 <ChevronRight size={18} className="group-hover:translate-x-1" />
+              ISSRE {CURRENT_EDITION_YEAR} <ChevronRight size={18} className="group-hover:translate-x-1" />
             </a>
             <button
               onClick={() => onNavigate('editions')}
@@ -755,9 +755,8 @@ function EditionsView() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredConferences.map((conf) => {
-          const currentYear = new Date().getFullYear();
-          const isUpcoming = conf.year > currentYear;
-          const isCurrent = conf.year === currentYear;
+          const isUpcoming = conf.year > CURRENT_EDITION_YEAR;
+          const isCurrent = conf.year === CURRENT_EDITION_YEAR;
           return (
             <div key={conf.year} className={`glass-card p-6 hover:shadow-md group flex flex-col ${isUpcoming ? 'border-primary/40' : isCurrent ? 'border-slate-400' : ''}`}>
               <div className="flex justify-between items-start mb-4">
