@@ -1481,7 +1481,7 @@ function HostingView() {
 }
 
 function CommitteeView() {
-  const [committeeFilter, setCommitteeFilter] = useState<'All' | 'Steering Committee' | 'Advisory Board'>('All');
+  const [committeeFilter, setCommitteeFilter] = useState<'All' | 'Steering Committee' | 'Ex-officio Members' | 'Advisory Board'>('All');
 
   const steeringCommittee = [
     { name: 'Marco Vieira', role: 'Chair', affiliation: 'University of North Carolina at Charlotte', country: 'USA', committeeType: 'Steering Committee', image: 'people/marco_vieira.jpg', website: 'https://marcovieira.me' },
@@ -1492,6 +1492,13 @@ function CommitteeView() {
     { name: 'Leonardo Mariani', affiliation: 'University of Milano - Bicocca', country: 'Italy', committeeType: 'Steering Committee', image: 'people/leonardo_mariani.jpg', website: 'https://en.unimib.it/leonardo-mariani' },
     { name: 'Hélène Waeselynck', affiliation: 'LAAS-CNRS', country: 'France', committeeType: 'Steering Committee', image: 'people/helene_waeselynck.jpg', website: 'https://homepages.laas.fr/waeselyn/' },
     { name: 'Ganesh Pai', affiliation: 'KBR / NASA Ames Research Center', country: 'USA', committeeType: 'Steering Committee', image: 'people/ganesh_pai.jpg', website: 'https://gjp.bitbucket.io' },
+  ];
+
+  // General Chairs of upcoming editions (ex-officio members of the Steering Committee)
+  const exOfficio = [
+    { name: 'Barbara Gallina', role: 'ISSRE 2027 General Chair', affiliation: 'Mälardalen University', country: 'Sweden', committeeType: 'Ex-officio Members', image: 'people/barbara_gallina.jpg', website: 'http://www.es.mdh.se/staff/308-Barbara_Gallina' },
+    { name: 'Tao Zhang', role: 'ISSRE 2027 General Chair', affiliation: 'Macau University of Science and Technology', country: 'Macao SAR China', committeeType: 'Ex-officio Members', image: 'people/tao_zhang.jpg', website: 'https://cszhangtao.github.io' },
+    { name: 'Nuno Laranjeiro', role: 'ISSRE 2028 General Chair', affiliation: 'University of Coimbra', country: 'Portugal', committeeType: 'Ex-officio Members', image: 'people/nuno_laranjeiro.jpg', website: 'http://eden.dei.uc.pt/~cnl' },
   ];
 
   const advisoryBoard = [
@@ -1505,19 +1512,21 @@ function CommitteeView() {
     { name: 'Mladen Vouk', affiliation: 'North Carolina State University', country: 'USA', committeeType: 'Advisory Board', image: 'people/mladen_vouk.jpg', website: 'https://csc.ncsu.edu/people/vouk/' },
   ];
 
-  const allMembers = [...steeringCommittee, ...advisoryBoard];
+  const allMembers = [...steeringCommittee, ...exOfficio, ...advisoryBoard];
 
   const filteredMembers = allMembers.filter(m =>
     committeeFilter === 'All' || m.committeeType === committeeFilter
   );
 
   const showSteering = committeeFilter === 'All' || committeeFilter === 'Steering Committee';
+  const showExOfficio = committeeFilter === 'All' || committeeFilter === 'Ex-officio Members';
   const showAdvisory = committeeFilter === 'All' || committeeFilter === 'Advisory Board';
 
   const visibleSteering = filteredMembers.filter(m => m.committeeType === 'Steering Committee');
+  const visibleExOfficio = filteredMembers.filter(m => m.committeeType === 'Ex-officio Members');
   const visibleAdvisory = filteredMembers.filter(m => m.committeeType === 'Advisory Board');
 
-  const committeeTypes: Array<'All' | 'Steering Committee' | 'Advisory Board'> = ['All', 'Steering Committee', 'Advisory Board'];
+  const committeeTypes: Array<'All' | 'Steering Committee' | 'Ex-officio Members' | 'Advisory Board'> = ['All', 'Steering Committee', 'Ex-officio Members', 'Advisory Board'];
 
   const MemberCard: React.FC<{ member: any }> = ({ member }) => {
     const [imgLoaded, setImgLoaded] = useState(false);
@@ -1570,7 +1579,7 @@ function CommitteeView() {
       );
     };
 
-    const hasSpecialRole = member.role && (member.role === 'Chair' || member.role === 'Vice-Chair');
+    const hasSpecialRole = Boolean(member.role);
 
     return (
       <div
@@ -1659,9 +1668,31 @@ function CommitteeView() {
         </div>
       )}
 
+      {/* Ex-officio Members Section */}
+      {showExOfficio && visibleExOfficio.length > 0 && (
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-2 h-8 rounded-full bg-slate-400" />
+            <div>
+              <h3 className="font-serif text-2xl font-bold text-slate-900">Ex-officio Members</h3>
+              <p className="text-slate-500 text-sm mt-0.5">
+                General Chairs of upcoming editions, who take part in the Steering Committee during the organization of their edition.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {visibleExOfficio.map((member, idx) => (
+              <MemberCard key={`eo-${idx}`} member={member} />
+            ))}
+          </div>
+
+        </div>
+      )}
+
       {/* Advisory Board Section */}
       {showAdvisory && visibleAdvisory.length > 0 && (
-        <div className={showSteering && visibleSteering.length > 0 ? 'mt-8' : ''}>
+        <div className={(showSteering && visibleSteering.length > 0) || (showExOfficio && visibleExOfficio.length > 0) ? 'mt-8' : ''}>
           <div className="flex items-center gap-3 mb-8">
             <div className="w-2 h-8 rounded-full bg-accent" />
             <div>
